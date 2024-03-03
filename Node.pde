@@ -65,12 +65,12 @@ class Node {
 
   // Updating node position based on applied force
   void update() {
-    linearMomentum.limit(10);
+    linearMomentum.limit(3);
+    angularMomentum = constrain(angularMomentum, -PI/30, PI/30);
     
     if (!Double.isNaN(linearMomentum.x) && !Double.isNaN(linearMomentum.y)) {
       pos.add(linearMomentum);
     }
-    //rotation += angularMomentum / mass;
     rotation += angularMomentum;
     //stop nodes from leaving square box
     pos.set(constrain(pos.x, -maxx - random(1), maxx + random(1)), constrain(pos.y, -maxx - random(1), maxx + random(1)));
